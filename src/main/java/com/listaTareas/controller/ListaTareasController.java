@@ -10,19 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.listaTareas.model.Tarea;
+import com.listaTareas.service.TareaService;
 
 @Controller
 @RequestMapping("/listaTareas")
 public class ListaTareasController {
-    private final ListaTareasService listaTareasService;
+    private final TareaService tareasService;
 
-    public ListaTareasController(ListaTareasService listaTareasService) {
-        this.listaTareasService = listaTareasService;
+    public ListaTareasController(TareaService tareasService) {
+        this.tareasService = tareasService;
     }
 
     @GetMapping("")
     public String mostrarTarea(Model model, @ModelAttribute("message") String mensaje){
-        // model.addAttribute("agenda", contactoService.obtenerContacto());
+        //model.addAttribute("agenda", tareasService.contactoService.obtenerContacto());
         model.addAttribute("message",mensaje);
         return "listaTareas";
     }
@@ -41,8 +42,8 @@ public class ListaTareasController {
     }
 
     @PostMapping("/eliminar/{nombre}")
-    public String eliminarContacto(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
-        boolean eliminado = listaTareasService.eliminarTarea(nombre);
+    public String eliminarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
+        boolean eliminado = tareasService.eliminarTarea(nombre);
         if(eliminado){
             redirectAttributes.addAttribute("message", "Tarea eliminada con éxito");
         }else{
@@ -52,22 +53,22 @@ public class ListaTareasController {
     }
 
     @GetMapping("/editar/{nombre}")
-    public String editarContacto(@PathVariable("nombre") String nombre, Model model){
-        Tarea tarea = listaTareasService.obtenerContactoPorNombre(nombre);
+    public String editarTarea(@PathVariable("nombre") String nombre, Model model){
+        Tarea tarea = tareasService.obtenerTareaPorNombre(nombre);
         model.addAttribute("tarea", tarea);
         return "editarTarea";
     }
 
     @PostMapping("/actualizar/{nombre}")
-    public String actualizarContacto(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
-        listaTareasService.actualizarContacto(nombreOriginal, tareaActualizada);
+    public String actualizarTarea(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
+        tareasService.actualizarTarea(nombreOriginal, tareaActualizada);
         redirectAttributes.addFlashAttribute("message", "Tarea actualizada con éxito");
         return "redirect:/listaTareas";
     }
 
     @PostMapping("/finalizada/{nombre}")
     public String finalizarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
-        listaTareasService.finalizarTarea(nombre);
+        tareasService.terminarTarea(nombre);
         redirectAttributes.addFlashAttribute("message", "Tarea finalizada");
         return "redirect:/listaTareas";
     }

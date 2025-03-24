@@ -47,13 +47,4 @@ public class Tarea {
         this.finalizada = finalizada;
     }
 
-    
-    
-
-    
-    
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> dd7186c0bf10ffe81a41e8586b6509e8c19a093c
