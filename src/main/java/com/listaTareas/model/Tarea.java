@@ -4,6 +4,7 @@ public class Tarea {
     private String nombre;
     private String contenido;
     private String comentario;
+    private boolean finalizada;
     
     public Tarea() {}
 
@@ -11,6 +12,7 @@ public class Tarea {
         this.nombre = nombre;
         this.contenido = contenido;
         this.comentario = comentario;
+        this.finalizada = false;
     }
 
     public String getNombre() {
@@ -37,8 +39,16 @@ public class Tarea {
         this.comentario = comentario;
     }
 
-    
+    public boolean isFinalizada() {
+        return finalizada;
+    }
 
+    public void setFinalizada(boolean finalizada) {
+        this.finalizada = finalizada;
+    }
+
+    
+    
 
     
     
