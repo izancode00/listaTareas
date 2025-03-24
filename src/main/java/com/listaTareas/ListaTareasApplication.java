@@ -1,4 +1,4 @@
-package com.example.listaTareas;
+package com.listaTareas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
