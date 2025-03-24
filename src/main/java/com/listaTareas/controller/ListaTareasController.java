@@ -13,7 +13,8 @@ import com.listaTareas.model.Tarea;
 import com.listaTareas.service.TareaService;
 
 @Controller
-@RequestMapping("/listaTareas")
+
+@RequestMapping("/lista")
 public class ListaTareasController {
     private final TareaService tareasService;
 
@@ -25,7 +26,7 @@ public class ListaTareasController {
     public String mostrarTarea(Model model, @ModelAttribute("message") String mensaje){
         //model.addAttribute("agenda", tareasService.contactoService.obtenerContacto());
         model.addAttribute("message",mensaje);
-        return "listaTareas";
+        return "lista";
     }
 
     @GetMapping("/nueva")
@@ -38,7 +39,7 @@ public class ListaTareasController {
     public String guardarContacto(@ModelAttribute Tarea tarea, RedirectAttributes redirectAttributes){
         //contactoService.guardarContacto(contacto);
         redirectAttributes.addFlashAttribute("guardar", "Tarea guardada con éxito");
-        return "redirect:/listaTareas";
+        return "redirect:/lista";
     }
 
     @PostMapping("/eliminar/{nombre}")
@@ -49,7 +50,7 @@ public class ListaTareasController {
         }else{
             redirectAttributes.addFlashAttribute("message", "No se pudo eliminar la tarea");
         }
-        return "redirect:/listaTareas";
+        return "redirect:/lista";
     }
 
     @GetMapping("/editar/{nombre}")
@@ -61,16 +62,17 @@ public class ListaTareasController {
 
     @PostMapping("/actualizar/{nombre}")
     public String actualizarTarea(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
-        tareasService.actualizarTarea(nombreOriginal, tareaActualizada);
+        tareasService.editarTarea(nombreOriginal);
         redirectAttributes.addFlashAttribute("message", "Tarea actualizada con éxito");
-        return "redirect:/listaTareas";
+        return "redirect:/lista";
+
     }
 
     @PostMapping("/finalizada/{nombre}")
     public String finalizarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
         tareasService.terminarTarea(nombre);
         redirectAttributes.addFlashAttribute("message", "Tarea finalizada");
-        return "redirect:/listaTareas";
+        return "redirect:/lista";
     }
 
 

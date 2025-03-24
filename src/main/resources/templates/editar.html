@@ -10,7 +10,7 @@
     <header>
         <h1>Editar Tarea</h1>
     </header>
-        <form action="/tareas/editar" method="post">
+         <form action="/tareas/editar" method="post">
             <div>
                 <label for="nombre">Nombre de la Tarea:</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -24,7 +24,10 @@
                 <textarea id="comentarios" name="comentarios"></textarea>
             </div>
             <div>
-                <button type="submit">Guardar Cambios</button>
+                
+            <form th:action="@{'/guardar/'+ ${entry.key}}" method="post" style="display: inline;">
+                <button onclick="location.href='main.html'" type="submit">Guardar Cambios</button>
+            </form>
             </div>
         </form>
 </body>
