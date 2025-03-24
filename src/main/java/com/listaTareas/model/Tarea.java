@@ -52,4 +52,8 @@ public class Tarea {
 
     
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> dd7186c0bf10ffe81a41e8586b6509e8c19a093c

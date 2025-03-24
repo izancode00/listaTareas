@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar contacto</title>
+    <style>
+        body{
+            background-color: #8d7373;
+            color: #fff;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        form{
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        h1{
+            text-align: center;
+        }
+        label{
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Editar contacto</h1>
+    <form th:action="@{'/listaTareas/actualizar/' + ${tarea.nombre}}" method="post">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="nombre" th:value="${tarea.nombre}" required>
+        </div>
+        <div>
+            <label>Contenido</label>
+            <input type="text" name="contenido" th:value="${tarea.contenido}" required>
+        </div>
+        <div>
+            <label>Comentario:</label>
+            <input type="text" name="comentario" th:value="${tarea.comentario}" required>
+        </div>
+        <button type="submit">Actualizar</button>
+    </form>
+    
+</body>
+</html>
