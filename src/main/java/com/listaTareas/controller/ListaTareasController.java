@@ -16,10 +16,10 @@ import com.listaTareas.service.TareaService;
 
 @RequestMapping("/lista")
 public class ListaTareasController {
-    private final TareaService tareasService;
+    private final TareaService tareaService;
 
     public ListaTareasController(TareaService tareasService) {
-        this.tareasService = tareasService;
+        this.tareaService = tareasService;
     }
 
     @GetMapping("")
@@ -29,22 +29,22 @@ public class ListaTareasController {
         return "lista";
     }
 
-    @GetMapping("/nueva")
+    @PostMapping("/nuevaTarea")
     public String nuevoContactoForm(Model model){
         model.addAttribute("tarea", new Tarea());
         return "nuevaTarea";
     }
 
     @PostMapping("/guardar")
-    public String guardarContacto(@ModelAttribute Tarea tarea, RedirectAttributes redirectAttributes){
-        //contactoService.guardarContacto(contacto);
+    public String añadirTarea(@ModelAttribute Tarea tarea, RedirectAttributes redirectAttributes){
+        tareaService.añadirTarea(tarea.getNombre(), tarea);
         redirectAttributes.addFlashAttribute("guardar", "Tarea guardada con éxito");
         return "redirect:/lista";
     }
 
     @PostMapping("/eliminar/{nombre}")
     public String eliminarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
-        boolean eliminado = tareasService.eliminarTarea(nombre);
+        boolean eliminado = tareaService.eliminarTarea(nombre);
         if(eliminado){
             redirectAttributes.addAttribute("message", "Tarea eliminada con éxito");
         }else{
@@ -55,14 +55,14 @@ public class ListaTareasController {
 
     @GetMapping("/editar/{nombre}")
     public String editarTarea(@PathVariable("nombre") String nombre, Model model){
-        Tarea tarea = tareasService.obtenerTareaPorNombre(nombre);
+        Tarea tarea = tareaService.obtenerTareaPorNombre(nombre);
         model.addAttribute("tarea", tarea);
         return "editarTarea";
     }
 
     @PostMapping("/actualizar/{nombre}")
     public String actualizarTarea(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
-        tareasService.editarTarea(nombreOriginal);
+        tareaService.editarTarea(nombreOriginal);
         redirectAttributes.addFlashAttribute("message", "Tarea actualizada con éxito");
         return "redirect:/lista";
 
@@ -70,7 +70,7 @@ public class ListaTareasController {
 
     @PostMapping("/finalizada/{nombre}")
     public String finalizarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
-        tareasService.terminarTarea(nombre);
+        tareaService.terminarTarea(nombre);
         redirectAttributes.addFlashAttribute("message", "Tarea finalizada");
         return "redirect:/lista";
     }
