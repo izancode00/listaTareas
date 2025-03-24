@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center; /* Center the container */
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the content in the column */
+        }
+        table {
+            width: 40%; /* Reduce the width of the tables to half of the original 80% */
+            border-collapse: collapse;
+            margin: 20px; /* Add margin on all sides */
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center; /* Center align text in table cells */
+        }
+        .buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center; /* Center align buttons */
+        }
+        .moved-table {
+            margin: 20px 0; /* Add margin between moved tables */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">AGILE</h1>
+    <div class="container">
+        <div class="column">
+            <h2>TO DO</h2>
+            <table>
+                <tr class="buttons">
+                    <td><button onclick="moveRow(this)">✅</button></td>
+                    <td><button onclick="location.href='editar.html'">✏️</button></td>
+                    <td><button onclick="deleteTable(this)">❌</button></td>
+                </tr>
+                <tr><td>Nombre tarea:<br>pepe</td></tr>
+                <tr><td>CONTENIDO</td></tr>
+                <tr><td>Comentarios:<br></td></tr>
+            </table>
+            <table>
+                <tr class="buttons">
+                    <td><button onclick="moveRow(this)">✅</button></td>
+                    <td><button onclick="location.href='editar.html'">✏️</button></td>
+                    <td><button onclick="deleteTable(this)">❌</button></td>
+                </tr>
+                <tr><td>Nombre tarea:<br>pepe</td></tr>
+                <tr><td>CONTENIDO</td></tr>
+                <tr><td>Comentarios:<br></td></tr>
+            </table>
+            <table>
+                <tr class="buttons">
+                    <td><button onclick="moveRow(this)">✅</button></td>
+                    <td><button onclick="location.href='editar.html'">✏️</button></td>
+                    <td><button onclick="deleteTable(this)">❌</button></td>
+                </tr>
+                <tr><td>Nombre tarea:<br>pepe</td></tr>
+                <tr><td>CONTENIDO</td></tr>
+                <tr><td>Comentarios:<br></td></tr>
+            </table>
+        </div>
+        <div id="targetDiv" class="column">
+            <h2>TAREAS FINALIZADAS</h2>
+        </div>
+    </div>
+    <script>
+        function moveRow(button) {
+            var table = button.closest('table');
+            var rows = table.querySelectorAll('tr:not(.buttons)');
+            var targetDiv = document.getElementById('targetDiv');
+            var targetTable = document.createElement('table');
+            targetTable.classList.add('moved-table');
+            
+            rows.forEach(function(row) {
+                var newRow = targetTable.insertRow();
+                newRow.innerHTML = row.innerHTML;
+            });
+            
+            var firstRow = document.createElement('tr');
+            firstRow.classList.add('buttons');
+            firstRow.innerHTML = `
+                <td><button>✅</button></td>
+                <td><button onclick="location.href='editar.html'">✏️</button></td>
+                <td><button onclick="deleteTable(this)">❌</button></td>
+            `;
+            targetTable.insertBefore(firstRow, targetTable.firstChild);
+            
+            targetDiv.appendChild(targetTable);
+            table.remove();
+        }
+
+        function deleteTable(button) {
+            var table = button.closest('table');
+            table.remove();
+        }
+    </script>
+</body>
+</html>
