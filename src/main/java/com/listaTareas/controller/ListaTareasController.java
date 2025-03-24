@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.listaTareas.model.Tarea;
 
 @Controller
-@RequestMapping("/tareas")
+@RequestMapping("/listaTareas")
 public class ListaTareasController {
     private final ListaTareasService listaTareasService;
 
@@ -24,7 +24,7 @@ public class ListaTareasController {
     public String mostrarTarea(Model model, @ModelAttribute("message") String mensaje){
         // model.addAttribute("agenda", contactoService.obtenerContacto());
         model.addAttribute("message",mensaje);
-        return "agenda";
+        return "listaTareas";
     }
 
     @GetMapping("/nueva")
@@ -37,7 +37,7 @@ public class ListaTareasController {
     public String guardarContacto(@ModelAttribute Tarea tarea, RedirectAttributes redirectAttributes){
         //contactoService.guardarContacto(contacto);
         redirectAttributes.addFlashAttribute("guardar", "Tarea guardada con éxito");
-        return "redirect:/tareas";
+        return "redirect:/listaTareas";
     }
 
     @PostMapping("/eliminar/{nombre}")
@@ -48,7 +48,7 @@ public class ListaTareasController {
         }else{
             redirectAttributes.addFlashAttribute("message", "No se pudo eliminar la tarea");
         }
-        return "redirect:/tareas";
+        return "redirect:/listaTareas";
     }
 
     @GetMapping("/editar/{nombre}")
@@ -62,14 +62,14 @@ public class ListaTareasController {
     public String actualizarContacto(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
         listaTareasService.actualizarContacto(nombreOriginal, tareaActualizada);
         redirectAttributes.addFlashAttribute("message", "Tarea actualizada con éxito");
-        return "redirect:/tareas";
+        return "redirect:/listaTareas";
     }
 
     @PostMapping("/finalizada/{nombre}")
     public String finalizarTarea(@PathVariable("nombre") String nombre, RedirectAttributes redirectAttributes){
         listaTareasService.finalizarTarea(nombre);
         redirectAttributes.addFlashAttribute("message", "Tarea finalizada");
-        return "redirect:/tareas";
+        return "redirect:/listaTareas";
     }
 
 
