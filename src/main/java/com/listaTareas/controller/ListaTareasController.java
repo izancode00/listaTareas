@@ -24,12 +24,13 @@ public class ListaTareasController {
 
     @GetMapping("")
     public String mostrarTarea(Model model, @ModelAttribute("message") String mensaje){
-        //model.addAttribute("agenda", tareasService.contactoService.obtenerContacto());
+        model.addAttribute("lista", tareaService.obtenerTareasPendientes());
+        model.addAttribute("lista", tareaService.obtenerTareasFinalizadas());
         model.addAttribute("message",mensaje);
         return "lista";
     }
 
-    @PostMapping("/nuevaTarea")
+    @GetMapping("/nuevaTarea")
     public String nuevoContactoForm(Model model){
         model.addAttribute("tarea", new Tarea());
         return "nuevaTarea";

@@ -11,6 +11,14 @@ public class TareaService {
     private Map<String, Tarea> tareasPendientes = new HashMap<>();
     private Map<String, Tarea> tareasTerminadas = new HashMap<>();
 
+    public Map<String, Tarea> obtenerTareasPendientes(){
+        return tareasPendientes;
+    }
+
+    public Map<String, Tarea> obtenerTareasFinalizadas(){
+        return tareasTerminadas;
+    }
+
     // Método para añadir una tarea a tareasPendientes
     public void añadirTarea(String nombre, Tarea tarea) {
         tareasPendientes.put(nombre, tarea);
