@@ -40,7 +40,7 @@
 </head>
 <body>
     <h1 style="text-align: center;">AGILE</h1>
-    <div class="container">
+    <div class="container"> <!--    PARTE DE TAREAS PENDIENTES    -->
         <div class="column">
             <h2>TO DO</h2>
             <a class="nueva-tarea"  href="/lista/nuevaTarea">Nueva tarea</a>
@@ -54,7 +54,28 @@
                 <tr><td>CONTENIDO:</td></tr>
                 <tr><td>Comentarios:<br></td></tr>
             </table>  -->
-        </div>
+            <tbody>
+                <tr th:each="entry : ${lista}">
+                    <td th:text="${entry.key}"></td>
+                    <td th:text="${entry.value.contenido}"></td>
+                    <td th:text="${entry.value.comentario}"></td>
+                    <!--<td>
+                        <form th:action="@{'/agenda/favorito/'+ ${entry.key}}" method="post" style="display: inline;">
+                            <button type="submit">
+                                <span th:if="${entry.value.favorito}">❌</span>
+                                <span th:if="${!entry.value.favorito}">⭐</span>
+                            </button>
+                        </form>
+                    </td>-->
+                    <td>
+                        <a class="editar" th:href="@{'/lista/editar/' + ${entry.key}}">✏</a>
+                        <form th:action="@{'/lista/eliminar/' + ${entry.key}}" method="post" style="display: inline;">
+                            <button class="eliminar" type="submit">🗑</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </div> <!--    PARTE DE TAREAS FINALIZADAS    -->
         <div id="targetDiv" class="column">
             <h2>TAREAS FINALIZADAS</h2>
         </div>
