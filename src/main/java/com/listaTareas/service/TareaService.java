@@ -46,16 +46,13 @@ public class TareaService {
     }
     //borrar
     public boolean eliminarTarea(String nombre){
-        Tarea tarea = tareasPendientes.get(nombre);
-        if(tarea != null){
+        if(tareasPendientes.containsKey(nombre)){
             tareasPendientes.remove(nombre);
             return true;
-        }else if (tareasPendientes.get(nombre) != null){
+        }if(tareasTerminadas.containsKey(nombre)){
             tareasTerminadas.remove(nombre);
             return true;
-        }else{
-            return false;
         }
-
+        return false;
     }
 }

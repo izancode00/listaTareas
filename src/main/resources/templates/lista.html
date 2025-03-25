@@ -62,17 +62,9 @@
             </table>  -->
             <table>
                 <tr th:each="entry : ${listaPendiente}">
-                    <td th:text="${entry.key}">  </td>
-                    <td th:text="${entry.value.contenido}">  </td>
-                    <td th:text="${entry.value.comentario}">  </td>
-                    <!--<td>
-                        <form th:action="@{'/agenda/favorito/'+ ${entry.key}}" method="post" style="display: inline;">
-                            <button type="submit">
-                                <span th:if="${entry.value.favorito}">❌</span>
-                                <span th:if="${!entry.value.favorito}">⭐</span>
-                            </button>
-                        </form>
-                    </td>-->
+                    <td th:text="${entry.key}">  </td><br>
+                    <td th:text="${entry.value.contenido}">  </td><br>
+                    <td th:text="${entry.value.comentario}">  </td><br>
                     <td>
                         <a class="editar" th:href="@{'/lista/editar/' + ${entry.key}}">✏</a>
                         <form th:action="@{'/lista/eliminar/' + ${entry.key}}" method="post" style="display: inline;">
@@ -88,8 +80,8 @@
         <div id="targetDiv" class="column">
             <h2>TAREAS FINALIZADAS</h2>
             <tr th:each="entry : ${listaFinalizada}">
-                <td th:text="${entry.key}"></td>
-                <td th:text="${entry.value.contenido}"></td>
+                <td th:text="${entry.key}"></td><br>
+                <td th:text="${entry.value.contenido}"></td><br>
                 <td th:text="${entry.value.comentario}"></td>
                 <td>
                     <form th:action="@{'/lista/eliminar/' + ${entry.key}}" method="post" style="display: inline;">
