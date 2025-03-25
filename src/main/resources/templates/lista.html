@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Principal</title>
     <style>
+        body{
+            background-color: #8d7373;
+            color: #fff;
+            margin: 0;
+            font-family: sans-serif;
+        }
         .container {
             display: flex;
             justify-content: center; /* Center the container */
@@ -54,11 +60,11 @@
                 <tr><td>CONTENIDO:</td></tr>
                 <tr><td>Comentarios:<br></td></tr>
             </table>  -->
-            <tbody>
-                <tr th:each="entry : ${lista}">
-                    <td th:text="${entry.key}"></td>
-                    <td th:text="${entry.value.contenido}"></td>
-                    <td th:text="${entry.value.comentario}"></td>
+            <table>
+                <tr th:each="entry : ${listaPendiente}">
+                    <td th:text="${entry.key}">  </td>
+                    <td th:text="${entry.value.contenido}">  </td>
+                    <td th:text="${entry.value.comentario}">  </td>
                     <!--<td>
                         <form th:action="@{'/agenda/favorito/'+ ${entry.key}}" method="post" style="display: inline;">
                             <button type="submit">
@@ -72,12 +78,25 @@
                         <form th:action="@{'/lista/eliminar/' + ${entry.key}}" method="post" style="display: inline;">
                             <button class="eliminar" type="submit">🗑</button>
                         </form>
+                        <form th:action="@{'/lista/finalizada/' + ${entry.key}}" method="post" style="display: inline;">
+                            <button class="finalizada" type="submit">✅</button>
+                        </form>
                     </td>
                 </tr>
-            </tbody>
+            </table>
         </div> <!--    PARTE DE TAREAS FINALIZADAS    -->
         <div id="targetDiv" class="column">
             <h2>TAREAS FINALIZADAS</h2>
+            <tr th:each="entry : ${listaFinalizada}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value.contenido}"></td>
+                <td th:text="${entry.value.comentario}"></td>
+                <td>
+                    <form th:action="@{'/lista/eliminar/' + ${entry.key}}" method="post" style="display: inline;">
+                        <button class="eliminar" type="submit">🗑</button>
+                    </form>
+                </td>
+            </tr>
         </div>
     </div>
     <script>

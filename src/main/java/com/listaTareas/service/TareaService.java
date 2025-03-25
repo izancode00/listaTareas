@@ -33,28 +33,29 @@ public class TareaService {
     }
 
     //editar por nombre
-    public void editarTarea(String id) {
-        Tarea tarea = tareasPendientes.remove(id);
-        if (tarea != null) {
-            tareasTerminadas.put(id, tarea);
+    public void editarTarea(String nombreOriginal, Tarea tareaActualizada) {
+        if(!nombreOriginal.equals(tareaActualizada.getNombre())){
+            tareasPendientes.remove(nombreOriginal);
         }
+        tareasPendientes.put(tareaActualizada.getNombre(), tareaActualizada);
     }
-//obtener por nombre
-public Tarea obtenerTareaPorNombre(String nombre) {
-    return tareasPendientes.get(nombre);
-}
-//borrar
-public boolean eliminarTarea(String nombre){
-    Tarea tarea = tareasPendientes.get(nombre);
-    if(tarea != null){
-        tareasPendientes.remove(nombre);
-        return true;
-    }else if (tareasPendientes.get(nombre) != null){
-    tareasTerminadas.remove(nombre);
-    return true;
-    }else{
-        return false;
+
+    //obtener por nombre
+    public Tarea obtenerTareaPorNombre(String nombre) {
+        return tareasPendientes.get(nombre);
     }
+    //borrar
+    public boolean eliminarTarea(String nombre){
+        Tarea tarea = tareasPendientes.get(nombre);
+        if(tarea != null){
+            tareasPendientes.remove(nombre);
+            return true;
+        }else if (tareasPendientes.get(nombre) != null){
+            tareasTerminadas.remove(nombre);
+            return true;
+        }else{
+            return false;
+        }
 
     }
 }

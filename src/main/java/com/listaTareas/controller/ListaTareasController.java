@@ -24,8 +24,8 @@ public class ListaTareasController {
 
     @GetMapping("")
     public String mostrarTarea(Model model, @ModelAttribute("message") String mensaje){
-        model.addAttribute("lista", tareaService.obtenerTareasPendientes());
-        model.addAttribute("lista", tareaService.obtenerTareasFinalizadas());
+        model.addAttribute("listaPendiente", tareaService.obtenerTareasPendientes());
+        model.addAttribute("listaFinalizada", tareaService.obtenerTareasFinalizadas());
         model.addAttribute("message",mensaje);
         return "lista";
     }
@@ -63,7 +63,7 @@ public class ListaTareasController {
 
     @PostMapping("/actualizar/{nombre}")
     public String actualizarTarea(@PathVariable("nombre") String nombreOriginal, Tarea tareaActualizada, RedirectAttributes redirectAttributes){
-        tareaService.editarTarea(nombreOriginal);
+        tareaService.editarTarea(nombreOriginal, tareaActualizada);
         redirectAttributes.addFlashAttribute("message", "Tarea actualizada con éxito");
         return "redirect:/lista";
 

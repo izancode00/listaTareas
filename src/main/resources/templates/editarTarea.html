@@ -28,7 +28,7 @@
 </head>
 <body>
     <h1>Editar contacto</h1>
-    <form th:action="@{'/listaTareas/actualizar/' + ${tarea.nombre}}" method="post">
+    <form th:action="@{'/lista/actualizar/' + ${tarea.nombre}}" method="post">
         <div>
             <label>Nombre:</label>
             <input type="text" name="nombre" th:value="${tarea.nombre}" required>
